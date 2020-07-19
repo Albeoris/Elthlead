@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{A3F3E360-CC5E-4501-A2BF-6CF9C62C7406}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Elthlead.Injection</RootNamespace>
+        <AssemblyName>Elthlead.Injection</AssemblyName>
+        <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>7.3</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>..\Output\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>..\Output\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony, Version=2.0.0.10, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\References\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\References\Assembly-CSharp.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\References\UnityEngine.CoreModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="CharacterDataId.cs" />
+        <Compile Include="ClassDataId.cs" />
+        <Compile Include="ContentLocator.cs" />
+        <Compile Include="ElthleadEngine.cs" />
+        <Compile Include="EndingDataId.cs" />
+        <Compile Include="EventMessageDataId.cs" />
+        <Compile Include="GameWordId.cs" />
+        <Compile Include="GoddessDialogDataId.cs" />
+        <Compile Include="HarmonyPatches.cs" />
+        <Compile Include="InformationDataId.cs" />
+        <Compile Include="MagicDataId.cs" />
+        <Compile Include="GroundTypeId.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="ScenarioDataId.cs" />
+        <Compile Include="SkillDataId.cs" />
+        <Compile Include="ItemDataId.cs" />
+        <Compile Include="StDataEventMessageListHandler.cs" />
+        <Compile Include="StDataHandler.cs" />
+        <Compile Include="StDataProxy.cs" />
+        <Compile Include="StWorkProxy.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Elthlead.Framework\Elthlead.Framework.csproj">
+        <Project>{2b92904f-77c3-474e-b950-0504075d0ce0}</Project>
+        <Name>Elthlead.Framework</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Elthlead.JSON\Elthlead.JSON.csproj">
+        <Project>{4b585306-1884-4100-9dce-ddd8dc62e411}</Project>
+        <Name>Elthlead.JSON</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Elthlead.ResourceManager\Elthlead.ResourceManager.csproj">
+        <Project>{056937dc-c712-4bc9-a52d-d82eba9d90d7}</Project>
+        <Name>Elthlead.ResourceManager</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
