@@ -58,6 +58,7 @@
         <Compile Include="GoddessDialogDataId.cs" />
         <Compile Include="HarmonyPatches.cs" />
         <Compile Include="InformationDataId.cs" />
+        <Compile Include="InputHandler.cs" />
         <Compile Include="MagicDataId.cs" />
         <Compile Include="GroundTypeId.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

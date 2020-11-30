@@ -10,7 +10,7 @@ namespace Elthlead.Injection
 {
     public sealed class StDataEventMessageListHandler
     {
-        private static readonly Regex __filter = new Regex(@"(?i)Text/RU/.*stage.*\.json$");
+        private static readonly Regex __filter = new Regex(@"(?i)Text/Override/.*stage.*\.json$");
 
         private readonly Dictionary<EventMessageDataId, String> _dic = new Dictionary<EventMessageDataId, String>(32000);
 
@@ -24,18 +24,25 @@ namespace Elthlead.Injection
 
         private void LoadAll()
         {
-            String directoryPath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/";
-            var files = Directory.GetFiles(directoryPath, "*.json");
+            String prefix = StreamingAssetsPath.Root.AbsolutePath + "/Text/Override/L";
 
-            Log.Message($"[{nameof(StDataEventMessageListHandler)}] Loading: {files.Length} files from {directoryPath}");
-
-            foreach (String filePath in files)
+            for (Int32 i = 1; i <= 2; i++)
             {
-                if (!__filter.IsMatch(filePath))
+                String directoryPath = prefix + i;
+                if (!Directory.Exists(directoryPath))
                     continue;
 
-                using (var input = File.OpenRead(filePath))
+                String[] files = Directory.GetFiles(directoryPath, "*.json");
+                Log.Message($"[{nameof(StDataEventMessageListHandler)}] Loading: {files.Length} files from {directoryPath}");
+
+                foreach (String filePath in files)
+                {
+                    if (!__filter.IsMatch(filePath))
+                        continue;
+
+                    using (var input = File.OpenRead(filePath))
                         Load(filePath, input);
+                }
             }
         }
 
@@ -52,7 +59,7 @@ namespace Elthlead.Injection
                 foreach (Reference<TransifexEntry> item in HarmonyPatches.PrepareTexts(StructuredJson.Read(input)).Enumerate())
                 {
                     EventMessageDataId id = EventMessageDataId.Parse(item.Key);
-                    _dic[id] = item.Value.Text;
+                    _dic[id] = item.Value.Text + ' '; // Avoid bug in the game engine
                 }
 
                 Log.Message($"[{nameof(StDataEventMessageListHandler)}] Loaded: {filePath}");

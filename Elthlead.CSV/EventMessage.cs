@@ -26,7 +26,18 @@ namespace Elthlead.CSV
 
         public String GetKey()
         {
-            String gameType = GameType == "ラング１" ? "EM1" : throw new NotSupportedException(GameType);
+            String gameType;
+            switch (GameType)
+            {
+                case "ラング１":
+                    gameType = "EM1";
+                    break;
+                case "ラング２":
+                    gameType = "EM2";
+                    break;
+                default:
+                    throw new NotSupportedException(GameType);
+            }
             return $"{gameType}_{ScenarioNumber:D3}_{ConversationNumber:D3}_{SentenceNumber:D2}_{Id:D5}";
         }
     }

@@ -20,8 +20,28 @@ namespace Elthlead
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        public static void Main_Tags(string[] args)
         {
+             // HashSet<Char> chars = new HashSet<Char>();
+             // foreach (var filePath in Directory.EnumerateFiles(@"C:\Steam\steamapps\common\Langrisser I & II\Langrisser I & II_Data\StreamingAssets\Text\RU", "*.json"))
+             // {
+             //     var entries = StructuredJson.Read(filePath);
+             //     foreach (var entry in entries)
+             //     {
+             //         foreach (var ch in entry.Value.Text)
+             //         {
+             //             chars.Add(ch);
+             //         }
+             //     }
+             // }
+             //
+             // foreach (var ch in "【】％２３：ＡＢＣＤＥＦＧＨＩＪＫＬＭ■!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~×‥…※ⅠⅡЁАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЬЭЯабвгдежзийклмнопрстуфхцчшщъыьэюяё")
+             // {
+             //     chars.Add(ch);
+             // }
+             //
+             // var str = new String(chars.OrderBy(c => c).ToArray()).Trim();
+            
             OrderedDictionary<String, TransifexEntry> lines = new OrderedDictionary<String, TransifexEntry>();
 
             void Add(String tag, String replacement)
@@ -746,7 +766,7 @@ namespace Elthlead
             String items1 = String.Join(Environment.NewLine + "|-" + Environment.NewLine + "| ", uniqueItems.OrderBy(s => s).Select(s => s.Replace(": ", " || ")));
         }
 
-        public static void Main_Stages(string[] args)
+        public static void Main(string[] args)
         {
             Dictionary<String, String> ids = new Dictionary<String, String>();
             var lines = new OrderedDictionary<String, TransifexEntry>();
@@ -783,9 +803,15 @@ namespace Elthlead
             var regexes = Tags.OrderByDescending(t => t.Length).Select(t => new KeyValuePair<String, String>(t.Replace("�", ""), t)).ToArray();
 
             names.Add("一般兵", "Soldier");
+            names.Add("一般兵Ａ", "Soldier A");
+            names.Add("侍女", "Maid");
+            names.Add("リアナ＆ラーナ", "Liana & Lana");
+            names.Add("指揮官（ナイトマスター）", "Commander (Knight Master)");
+            names.Add("モンスター", "Monster");
+            names.Add("システムメッセージ", "System Message");
             names.Add("0", "System");
 
-
+            // Langrisser I
             var path = @"C:\Steam\steamapps\common\Langrisser I & II\csv\csv\Resources\csv\eventMessage.txt";
             foreach (var group in DB.EnumerateAll<EventMessage>(path).GroupBy(m => m.ScenarioNumber))
             {
@@ -796,7 +822,22 @@ namespace Elthlead
                     Add(message.GetKey(), PrepareMessage(message, regexes), $"{names[message.CharacterName]} ({message.VoiceFile})");
                 }
 
-                path = $@"C:\Steam\steamapps\common\Langrisser I & II\csv\csv\Resources\csv\Stage_{group.Key:D3}.json";
+                path = $@"C:\Steam\steamapps\common\Langrisser I & II\csv\csv\Resources\csv\L1\L1_Stage_{group.Key:D3}.json";
+                StructuredJson.Write(path, lines);
+            }
+            
+            // Langrisser II
+            path = @"C:\Steam\steamapps\common\Langrisser I & II\csv\csv\Resources\csv\eventMessage2.txt";
+            foreach (var group in DB.EnumerateAll<EventMessage>(path).GroupBy(m => m.ScenarioNumber))
+            {
+                lines.Clear();
+                ids.Clear();
+                foreach (var message in group)
+                {
+                    Add(message.GetKey(), PrepareMessage(message, regexes), $"{names[message.CharacterName]} ({message.VoiceFile})");
+                }
+
+                path = $@"C:\Steam\steamapps\common\Langrisser I & II\csv\csv\Resources\csv\L2\L2_Stage_{group.Key:D3}.json";
                 StructuredJson.Write(path, lines);
             }
         }

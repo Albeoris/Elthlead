@@ -10,6 +10,7 @@ using Elthlead.JSON;
 using Elthlead.ResourceManager;
 using GameCommon;
 using HarmonyLib;
+using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 // ReSharper disable InconsistentNaming
@@ -43,13 +44,12 @@ namespace Elthlead.Injection
         {
             public static void Postfix(UnitManager __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_charactersjson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("Characters");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[{nameof(UnitManager_ReadCSV_CharactorData)}] File not found: {filePath}");
+                        Log.Warning($"[{nameof(UnitManager_ReadCSV_CharactorData)}] File not found: Characters.json");
                         return;
                     }
 
@@ -63,11 +63,11 @@ namespace Elthlead.Injection
                         character.name[language] = pair.Value.Text;
                     }
 
-                    Log.Message($"[{nameof(UnitManager_ReadCSV_CharactorData)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(UnitManager_ReadCSV_CharactorData)}] Loaded: Characters.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_CharactorData)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_CharactorData)}] Failed to load Characters.json");
                 }
             }
         }
@@ -78,13 +78,12 @@ namespace Elthlead.Injection
         {
             public static void Postfix(UnitManager __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_classesjson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("Classes");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[{nameof(UnitManager_ReadCSV_ClassData)}] File not found: {filePath}");
+                        Log.Warning($"[{nameof(UnitManager_ReadCSV_ClassData)}] File not found: Classes.json");
                         return;
                     }
 
@@ -109,11 +108,11 @@ namespace Elthlead.Injection
                         }
                     }
 
-                    Log.Message($"[{nameof(UnitManager_ReadCSV_ClassData)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(UnitManager_ReadCSV_ClassData)}] Loaded: Classes.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_ClassData)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_ClassData)}] Failed to load Classes.json");
                 }
             }
         }
@@ -124,13 +123,12 @@ namespace Elthlead.Injection
         {
             public static void Postfix(UnitManager __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_magicjson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("Magic");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[{nameof(UnitManager_ReadCSV_MagicData)}] File not found: {filePath}");
+                        Log.Warning($"[{nameof(UnitManager_ReadCSV_MagicData)}] File not found: Magic.json");
                         return;
                     }
 
@@ -155,11 +153,11 @@ namespace Elthlead.Injection
                         }
                     }
 
-                    Log.Message($"[{nameof(UnitManager_ReadCSV_MagicData)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(UnitManager_ReadCSV_MagicData)}] Loaded: Magic.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_MagicData)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_MagicData)}] Failed to load Magic.json");
                 }
             }
         }
@@ -170,13 +168,12 @@ namespace Elthlead.Injection
         {
             public static void Postfix(UnitManager __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_itemsjson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("Items");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[{nameof(UnitManager_ReadCSV_ItemData)}] File not found: {filePath}");
+                        Log.Warning($"[{nameof(UnitManager_ReadCSV_ItemData)}] File not found: Items.json");
                         return;
                     }
 
@@ -204,11 +201,11 @@ namespace Elthlead.Injection
                         }
                     }
 
-                    Log.Message($"[{nameof(UnitManager_ReadCSV_ItemData)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(UnitManager_ReadCSV_ItemData)}] Loaded: Items.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_ItemData)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_ItemData)}] Failed to load Items.json");
                 }
             }
         }
@@ -219,13 +216,12 @@ namespace Elthlead.Injection
         {
             public static void Postfix(UnitManager __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_skillsjson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("Skills");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[{nameof(UnitManager_ReadCSV_SkillData)}] File not found: {filePath}");
+                        Log.Warning($"[{nameof(UnitManager_ReadCSV_SkillData)}] File not found: Skills.json");
                         return;
                     }
 
@@ -253,11 +249,11 @@ namespace Elthlead.Injection
                         }
                     }
 
-                    Log.Message($"[{nameof(UnitManager_ReadCSV_SkillData)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(UnitManager_ReadCSV_SkillData)}] Loaded: Skills.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_SkillData)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(UnitManager_ReadCSV_SkillData)}] Failed to load Skills.json");
                 }
             }
         }
@@ -268,13 +264,12 @@ namespace Elthlead.Injection
         {
             public static void Postfix(GameMain __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_systemjson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("System");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[{nameof(GameMain_ReadCSVData_InfomationMessageData)}] File not found: {filePath}");
+                        Log.Warning($"[{nameof(GameMain_ReadCSVData_InfomationMessageData)}] File not found: System.json");
                         return;
                     }
 
@@ -291,11 +286,11 @@ namespace Elthlead.Injection
                             info.messageText[language, reference.Button.Value] = item.Value.Text;
                     }
 
-                    Log.Message($"[{nameof(GameMain_ReadCSVData_InfomationMessageData)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(GameMain_ReadCSVData_InfomationMessageData)}] Loaded: System.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(GameMain_ReadCSVData_InfomationMessageData)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(GameMain_ReadCSVData_InfomationMessageData)}] Failed to load System.json");
                 }
             }
         }
@@ -306,13 +301,12 @@ namespace Elthlead.Injection
         {
             static void Postfix(GameMain __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_gamewordsjson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("GameWords");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[{nameof(GameMain_ReadCSVData_GameSystemWordData)}] File not found: {filePath}");
+                        Log.Warning($"[{nameof(GameMain_ReadCSVData_GameSystemWordData)}] File not found: GameWords.json");
                         return;
                     }
 
@@ -326,11 +320,97 @@ namespace Elthlead.Injection
                         word.worddata[language] = item.Value.Text;
                     }
 
-                    Log.Message($"[{nameof(GameMain_ReadCSVData_GameSystemWordData)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(GameMain_ReadCSVData_GameSystemWordData)}] Loaded: GameWords.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(GameMain_ReadCSVData_GameSystemWordData)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(GameMain_ReadCSVData_GameSystemWordData)}] Failed to load GameWords.json");
+                }
+            }
+        }
+        
+        [HarmonyPatch(typeof(GameMain))]
+        [HarmonyPatch(nameof(GameMain.ReadCSVData_MapAttribute))]
+        private sealed class GameMain_ReadCSVData_MapAttribute
+        {
+            public static void Postfix(GameMain __instance)
+            {
+                try
+                {
+                    String filePath = FindOverridenFile("GroundTypes");
+                    if (filePath is null)
+                    {
+                        Log.Warning($"[{nameof(GameMain_ReadCSVData_MapAttribute)}] File not found: GroundTypes.json");
+                        return;
+                    }
+
+                    Int32 language = StWorkProxy.CurrentLanguage;
+                    MapAttribute[] mapAttributes = StWorkProxy.MapAttribute;
+
+                    foreach (Reference<TransifexEntry> item in PrepareTexts(filePath).Enumerate())
+                    {
+                        GroundTypeId reference = GroundTypeId.Parse(item.Key);
+                        MapAttribute info = mapAttributes[reference.Id];
+                        info.name[language] = item.Value.Text;
+                    }
+
+                    Log.Message($"[{nameof(GameMain_ReadCSVData_MapAttribute)}] Loaded: GroundTypes.json");
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, $"[{nameof(GameMain_ReadCSVData_MapAttribute)}] Failed to load GroundTypes.json");
+                }
+            }
+        }
+        
+        [HarmonyPatch(typeof(GameMain))]
+        [HarmonyPatch(nameof(GameMain.ReadCSVData_EndingData))]
+        private sealed class GameMain_ReadCSVData_EndingData
+        {
+            public static void Postfix(GameMain __instance)
+            {
+                try
+                {
+                    String filePath = FindOverridenFile("Ending");
+                    if (filePath is null)
+                    {
+                        Log.Warning($"[{nameof(GameMain_ReadCSVData_EndingData)}] File not found: Ending.json");
+                        return;
+                    }
+
+                    Int32 language = StWorkProxy.CurrentLanguage;
+                    EndingData[] engings = __instance.endingData;
+
+                    foreach (Reference<TransifexEntry> item in PrepareTexts(filePath).Enumerate())
+                    {
+                        EndingDataId reference = EndingDataId.Parse(item.Key);
+                        EndingData info = engings[reference.Id];
+
+                        Int32 sceneIndex = reference.Scene - 1;
+                        String valueText = item.Value.Text;
+                        
+                        switch (language)
+                        {
+                            case 1:
+                                info.endingText_En[0, sceneIndex] = valueText;
+                                break;
+                            case 2:
+                                info.endingText_Ch[0, sceneIndex] = valueText;
+                                break;
+                            case 3:
+                                info.endingText_Ko[0, sceneIndex] = valueText;
+                                break;
+                            default:
+                                info.endingText_Jp[0, sceneIndex] = valueText;
+                                break;
+                        }
+                    }
+
+                    Log.Message($"[{nameof(GameMain_ReadCSVData_EndingData)}] Loaded: Ending.json");
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, $"[{nameof(GameMain_ReadCSVData_EndingData)}] Failed to load Ending.json");
                 }
             }
         }
@@ -341,13 +421,12 @@ namespace Elthlead.Injection
         {
             public static void Postfix(GameMain __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_scenarioinfojson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("ScenarioInfo");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[{nameof(GameMain_ReadCSVData_ScenarioInfoData)}] File not found: {filePath}");
+                        Log.Warning($"[{nameof(GameMain_ReadCSVData_ScenarioInfoData)}] File not found: ScenarioInfo.json");
                         return;
                     }
 
@@ -406,11 +485,11 @@ namespace Elthlead.Injection
                         }
                     }
 
-                    Log.Message($"[{nameof(GameMain_ReadCSVData_ScenarioInfoData)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(GameMain_ReadCSVData_ScenarioInfoData)}] Loaded: ScenarioInfo.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(GameMain_ReadCSVData_ScenarioInfoData)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(GameMain_ReadCSVData_ScenarioInfoData)}] Failed to load ScenarioInfo.json");
                 }
             }
         }
@@ -425,13 +504,12 @@ namespace Elthlead.Injection
 
             void Postfix(GameMain __instance)
             {
-                String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_goddessdialogjson_ru.json";
-
                 try
                 {
-                    if (!File.Exists(filePath))
+                    String filePath = FindOverridenFile("GoddessDialog");
+                    if (filePath is null)
                     {
-                        Log.Warning($"[Harmony] File not found: {filePath}");
+                        Log.Warning($"[{nameof(StDataEventMessageListHandler)}] File not found: GoddessDialog.json");
                         return;
                     }
 
@@ -450,11 +528,11 @@ namespace Elthlead.Injection
                             question.@select[language * 3 + id.Answer.Value - 1] = text;
                     }
 
-                    Log.Message($"[{nameof(StDataEventMessageListHandler)}] Loaded: {filePath}");
+                    Log.Message($"[{nameof(StDataEventMessageListHandler)}] Loaded: GoddessDialog.json");
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"[{nameof(StDataEventMessageListHandler)}] Failed to load {filePath}");
+                    Log.Error(ex, $"[{nameof(StDataEventMessageListHandler)}] Failed to load GoddessDialog.json");
                 }
             }
         }
@@ -510,14 +588,13 @@ namespace Elthlead.Injection
 
         private static Reference<TextReplacement>[] LoadTags()
         {
-            String filePath = StreamingAssetsPath.Root.AbsolutePath + "/Text/RU/for_use_langrisser_tagsjson_ru.json";
-
             try
             {
                 var result = new List<Reference<TextReplacement>>();
-                if (!File.Exists(filePath))
+                String filePath = FindOverridenFile("Tags");
+                if (filePath is null)
                 {
-                    Log.Warning($"[Harmony] File not found: {filePath}");
+                    Log.Warning($"[{nameof(StDataEventMessageListHandler)}] File not found: Tags.json");
                     return result.ToArray();
                 }
 
@@ -529,7 +606,7 @@ namespace Elthlead.Injection
                     result.Add(new Reference<TextReplacement>(tag, text));
                 }
 
-                Log.Message($"[{nameof(StDataEventMessageListHandler)}] Loaded: {filePath}");
+                Log.Message($"[{nameof(StDataEventMessageListHandler)}] Loaded: Tags.json");
                 return result.ToArray();
             }
             catch (Exception ex)
@@ -537,6 +614,16 @@ namespace Elthlead.Injection
                 Console.WriteLine(ex);
                 throw;
             }
+        }
+
+        [CanBeNull]
+        private static String FindOverridenFile(String name)
+        {
+            String directoryPath = StreamingAssetsPath.Root.AbsolutePath + "/Text/Override/";
+            if (!Directory.Exists(directoryPath))
+                return null;
+
+            return Directory.GetFiles(directoryPath, "*" + name + "*.json").SingleOrDefault();
         }
     }
 }
